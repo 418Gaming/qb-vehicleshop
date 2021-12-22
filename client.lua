@@ -3,6 +3,8 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local PlayerData = QBCore.Functions.GetPlayerData() -- Just for resource restart (same as event handler)
 local inPDM = false
 local inLuxury = false
+local inTruck = false
+local inRvs = false
 local testDriveVeh, inTestDrive = 0, false
 local ClosestVehicle, ClosestShop = 1, nil
 local zones = {}
@@ -178,7 +180,7 @@ local function createVehZones(ClosestShop) -- This will create an entity zone if
                     icon = "fas fa-car",
                     label = "Vehicle Interaction",
                     canInteract = function(entity)
-                        if (inPDM or inLuxury) and (Config.Shops[ClosestShop]['Job'] == 'none' or PlayerData.job.name == Config.Shops[ClosestShop]['Job']) then
+                        if (inPDM or inLuxury or inTruck or inRvs) and (Config.Shops[ClosestShop]['Job'] == 'none' or PlayerData.job.name == Config.Shops[ClosestShop]['Job']) then
                             return true
                         end
                         return false
@@ -338,6 +340,152 @@ luxury:onPlayerInOut(function(isPointInside)
         end)
     else
         inLuxury = false
+        ClosestShop = nil
+    end
+end)
+
+local truck = PolyZone:Create({
+    vector2(846.45, -904.43),
+    vector2(846.36, -879.26),
+    vector2(866.7, -878.05),
+    vector2(874.34, -886.5),
+    vector2(868.4, -898.72),
+    vector2(863.79, -910.02),
+    vector2(855.07, -913.12),
+    vector2(848.54, -912.44)
+  }, {
+    name="truck",
+    minZ = 25.0,
+    maxZ = 28.0
+})
+
+truck:onPlayerInOut(function(isPointInside)
+    if isPointInside then
+        ClosestShop = 'truck'
+        inTruck = true
+        CreateThread(function()
+            while inTruck do
+                setClosestShowroomVehicle()
+                vehicleMenu = {
+                    {
+                        isMenuHeader = true,
+                        header = getVehBrand():upper().. ' '..getVehName():upper().. ' - $' ..getVehPrice(),
+                    },
+                    {
+                        header = 'Test Drive',
+                        txt = 'Test drive currently selected vehicle',
+                        params = {
+                            event = 'qb-vehicleshop:client:TestDrive',
+                        }
+                    },
+                    {
+                        header = "Buy Vehicle",
+                        txt = 'Purchase currently selected vehicle',
+                        params = {
+                            isServer = true,
+                            event = 'qb-vehicleshop:server:buyShowroomVehicle',
+                            args = {
+                                buyVehicle = Config.Shops[ClosestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
+                            }
+                        }
+                    },
+                    {
+                        header = 'Finance Vehicle',
+                        txt = 'Finance currently selected vehicle',
+                        params = {
+                            event = 'qb-vehicleshop:client:openFinance',
+                            args = {
+                                price = getVehPrice(),
+                                buyVehicle = Config.Shops[ClosestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
+                            }
+                        }
+                    },
+                    {
+                        header = 'Swap Vehicle',
+                        txt = 'Change currently selected vehicle',
+                        params = {
+                            event = 'qb-vehicleshop:client:vehCategories',
+                        }
+                    },
+                }
+                Wait(1000)
+            end
+        end)
+    else
+        inTruck = false
+        ClosestShop = nil
+    end
+end)
+
+local rvs = PolyZone:Create({
+    vector2(1215.7, 2727.57),
+    vector2(1233.24, 2727.54),
+    vector2(1240.7, 2722.79),
+    vector2(1243.69, 2713.3),
+    vector2(1230.4, 2710.13),
+    vector2(1215.49, 2711.15),
+    vector2(1210.87, 2718.34),
+    vector2(1216.29, 2727.44)
+  }, {
+    name="rvs",
+    minZ = 30.0,
+    maxZ = 40.0
+})
+
+rvs:onPlayerInOut(function(isPointInside)
+    if isPointInside then
+        ClosestShop = 'rvs'
+        inRvs = true
+        CreateThread(function()
+            while inRvs do
+                setClosestShowroomVehicle()
+                vehicleMenu = {
+                    {
+                        isMenuHeader = true,
+                        header = getVehBrand():upper().. ' '..getVehName():upper().. ' - $' ..getVehPrice(),
+                    },
+                    {
+                        header = 'Test Drive',
+                        txt = 'Test drive currently selected vehicle',
+                        params = {
+                            event = 'qb-vehicleshop:client:TestDrive',
+                        }
+                    },
+                    {
+                        header = "Buy Vehicle",
+                        txt = 'Purchase currently selected vehicle',
+                        params = {
+                            isServer = true,
+                            event = 'qb-vehicleshop:server:buyShowroomVehicle',
+                            args = {
+                                buyVehicle = Config.Shops[ClosestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
+                            }
+                        }
+                    },
+                    {
+                        header = 'Finance Vehicle',
+                        txt = 'Finance currently selected vehicle',
+                        params = {
+                            event = 'qb-vehicleshop:client:openFinance',
+                            args = {
+                                price = getVehPrice(),
+                                buyVehicle = Config.Shops[ClosestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
+                            }
+                        }
+                    },
+                    {
+                        header = 'Swap Vehicle',
+                        txt = 'Change currently selected vehicle',
+                        params = {
+                            event = 'qb-vehicleshop:client:vehCategories',
+                        }
+                    },
+                }
+                Wait(1000)
+            end
+        end)
+    else
+        inRvs = false
         ClosestShop = nil
     end
 end)

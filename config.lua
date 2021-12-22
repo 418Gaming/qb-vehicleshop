@@ -2,7 +2,7 @@ Config = {}
 Config.UsingTarget = false -- If you are using qb-target (uses entity zones to target vehicles)
 Config.Commission = 0.10 -- Percent that goes to sales person from a full car sale 10%
 Config.FinanceCommission = 0.05 -- Percent that goes to sales person from a finance sale 5%
-Config.FinanceZone = vector3(-29.53, -1103.67, 26.42) -- Where the finance menu is located
+Config.FinanceZone = vector3(-52.6, 72.84, 71.93) -- Where the finance menu is located
 Config.PaymentWarning = 10 -- time in minutes that player has to make payment before repo
 Config.PaymentInterval = 24 -- time in hours between payment being due
 Config.MinimumDown = 10 -- minimum percentage allowed down
@@ -16,13 +16,11 @@ Config.Shops = {
             ['sedans'] = 'Sedans',
             ['coupes'] = 'Coupes',
             ['suvs'] = 'SUVs',
-            ['offroad'] = 'Offroad',
             ['muscle'] = 'Muscle',
             ['compacts'] = 'Compacts',
             ['motorcycles'] = 'Motorcycles',
-            ['vans'] = 'Vans'
         },
-        ['TestDriveTimeLimit'] = 0.5, -- Time in minutes until the vehicle gets deleted
+        ['TestDriveTimeLimit'] = 5.0, -- Time in minutes until the vehicle gets deleted
         ['Location'] = vector3(-45.67, -1098.34, 26.42), -- Blip Location
         ['ReturnLocation'] = vector3(-44.74, -1082.58, 26.68), -- Location to return vehicle, only enables if the vehicleshop has a job owned
         ['VehicleSpawn'] = vector4(-56.79, -1109.85, 26.43, 71.5), -- Spawn location when vehicle is bought
@@ -76,7 +74,7 @@ Config.Shops = {
             ['super'] = 'Super',
             ['sports'] = 'Sports'
         },
-        ['TestDriveTimeLimit'] = 0.5,
+        ['TestDriveTimeLimit'] = 5.0,
         ['Location'] = vector3(-63.59, 68.25, 73.06),
         ['ReturnLocation'] = vector3(-65.05, 81.23, 71.16),
         ['VehicleSpawn'] = vector4(-71.13, 84.04, 71.09, 65.23),
@@ -102,5 +100,47 @@ Config.Shops = {
                 chosenVehicle = 'comet2',
             }
         }
-    } -- Add your next table under this comma
+    }, -- Add your next table under this comma
+    ['truck'] = {
+        ['Job'] = 'none', -- Name of job or none
+        ['ShopLabel'] = 'Truck Shop',
+        ['Categories'] = {
+            ['box'] = 'Box Trucks',
+            ['haul'] = 'Haulers',
+            ['other'] = 'Other Trucks',
+            ['tow'] = 'Tow Trucks',
+            ['trans'] = 'Transport Trucks'
+        },
+        ['TestDriveTimeLimit'] = 5.0,
+        ['Location'] = vector3(844.75, -902.88, 25.25),
+        ['ReturnLocation'] = vector3(-65.05, 81.23, 71.16),
+        ['VehicleSpawn'] = vector4(853.9, -912.69, 25.63, 356.52),
+        ['ShowroomVehicles'] = {
+            [1] = {
+                coords = vector4(856.02, -893.57, 24.5, 269.48),
+                defaultVehicle = 'boxvilleretro',
+                chosenVehicle = 'boxvilleretro',
+            }
+        }
+    },
+    ['rvs'] = {
+        ['Job'] = 'none', -- Name of job or none
+        ['ShopLabel'] = 'RV Shop',
+        ['Categories'] = {
+            ['offroad'] = 'Offroad',
+            ['camper'] = 'Camper',
+            ['vans'] = 'Vans'
+        },
+        ['TestDriveTimeLimit'] = 5.0,
+        ['Location'] = vector3(1226.5, 2722.61, 38.0),
+        ['ReturnLocation'] = vector3(-65.05, 81.23, 71.16),
+        ['VehicleSpawn'] = vector4(1210.33, 2716.84, 38.0, 178.37),
+        ['ShowroomVehicles'] = {
+            [1] = {
+                coords = vector4(1224.9, 2722.35, 37.2, 87.43),
+                defaultVehicle = 'camper',
+                chosenVehicle = 'camper',
+            }
+        }
+    },
 }
