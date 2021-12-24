@@ -19,6 +19,7 @@ Config.Shops = {
             ['muscle'] = 'Muscle',
             ['compacts'] = 'Compacts',
             ['motorcycles'] = 'Motorcycles',
+            ['irl'] = 'Real Vehicles',
         },
         ['TestDriveTimeLimit'] = 5.0, -- Time in minutes until the vehicle gets deleted
         ['Location'] = vector3(-45.67, -1098.34, 26.42), -- Blip Location
@@ -62,8 +63,8 @@ Config.Shops = {
             },
             [8] = {
                 coords = vector4(-44.28, -1102.47, 25.44, 298.5),
-                defaultVehicle = 'bati',
-                chosenVehicle = 'bati',
+                defaultVehicle = 'r820',
+                chosenVehicle = 'r820',
             }
         },
     },
