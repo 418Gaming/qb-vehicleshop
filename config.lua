@@ -138,7 +138,7 @@ Config.Shops = {
         ['VehicleSpawn'] = vector4(1210.33, 2716.84, 38.0, 178.37),
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(1224.9, 2722.35, 37.2, 87.43),
+                coords = vector4(1224.9, 2722.35, 36.8, 87.43),
                 defaultVehicle = 'f100',
                 chosenVehicle = 'f100',
             }
