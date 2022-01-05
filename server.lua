@@ -442,6 +442,11 @@ RegisterNetEvent('qb-vehicleshop:server:checkFinance', function()
     end
 end)
 
+function QBCore.Functions.GetPlate(vehicle)
+    if vehicle == 0 then return end
+    return QBCore.Shared.Trim(GetVehicleNumberPlateText(vehicle))
+end
+
 -- Transfer vehicle to player in passenger seat
 QBCore.Commands.Add('transferVehicle', 'Gift or sell your vehicle', {{ name = 'amount', help = 'Sell amount' }}, false, function(source, args)
     local src = source
