@@ -6,8 +6,18 @@ local inLuxury = false
 local inTruck = false
 local inRvs = false
 local testDriveVeh, inTestDrive = 0, false
-local ClosestVehicle, ClosestShop = 1, nil
+local ClosestVehicle = 1
 local zones = {}
+
+
+function getShopInsideOf()
+    for name, shop in pairs(Config.Shops) do -- foreach shop
+        if insideZones[name] then
+            return name
+        end
+    end
+    return nil
+end
 
 -- Handlers
 
